@@ -49,7 +49,7 @@ class DBManager:
         return cur.fetchall()
 
     def get_vacancies_with_keyword(self, keyword):
-        """получаем список всех вакансий, в названии которых содержатся переданные в метод слова, например 'python'"""
+        """Получение списка всех вакансий, в названии которых содержатся переданные в метод слова, например 'python'"""
 
         cur = self.conn.cursor()
         cur.execute(f"""

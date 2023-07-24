@@ -29,3 +29,30 @@ INSERT INTO companies (id, name, city, description, url)
 
 INSERT INTO vacancies (name, company_id, salary_min, salary_max, url)
                             VALUES (%s, %s, %s, %s, %s)
+
+-- Получение списка всех компаний и количества вакансий у каждой компании
+
+SELECT companies.name, COUNT(vacancies.id)
+FROM companies JOIN vacancies ON vacancies.company_id = companies.id
+GROUP BY companies.name;
+
+-- Получение списка всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию
+
+SELECT companies.name, vacancies.name, vacancies.salary_min, vacancies.salary_max, vacancies.url
+FROM vacancies JOIN companies ON vacancies.company_id = companies.id;
+
+-- Получение средней зарплаты по вакансиям
+
+SELECT AVG(vacancies.salary_max)
+FROM vacancies;
+
+-- Получение списка всех вакансий, у которых зарплата выше средней по всем вакансиям
+
+SELECT companies.name, vacancies.name, vacancies.salary_min, vacancies.salary_max, vacancies.url
+FROM vacancies JOIN companies ON vacancies.company_id = companies.id
+WHERE vacancies.salary_max > ({self.get_avg_salary()[0]});
+
+-- Получение списка всех вакансий, в названии которых содержатся переданные в метод слова, например 'python'
+
+SELECT *
+FROM vacancies WHERE vacancies.name LIKE '%{keyword}%'
