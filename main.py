@@ -8,7 +8,7 @@ def main():
     create_database('hh_vacancies', params)
     create_tables('hh_vacancies', params)
 
-    employees_id = [4232036, 581458, 5657254, 1455, 2180, 12550, 15478, 5694, 1740, 1122462]
+    employees_id = [1959252, 581458, 5657254, 3529, 586, 12550, 15478, 5694, 3127, 2324020]
 
     for employer in employees_id:
         company = get_request(f'https://api.hh.ru/employers/{employer}')
